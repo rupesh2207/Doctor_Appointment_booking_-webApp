@@ -1,21 +1,26 @@
-import React from 'react'
-import '../styles/Registerstyles.css'
-import {Form, Input,message} from 'antd'
-import axios from 'axios'
-import {Link, useNavigate} from 'react-router-dom'
+import React from 'react';
+import '../styles/Registerstyles.css';
+import {Form, Input,message} from 'antd';
+import {useDispatch} from 'react-redux';
+import {showLoading, hideLoading} from "../redux/features/alertSclice";
+import axios from 'axios';
+import {Link, useNavigate} from 'react-router-dom';
 
 
 const Register = () => {
 
     const navigate = useNavigate();
+    const dispactch = useDispatch();
 
     // form handler
     const onFinishHandler = async (values) => {
         try {
+            dispactch(showLoading());
             const res = await axios.post(
                 'http://localhost:8080/api/v1/user/register', 
                 values
             )
+            dispactch(hideLoading());
             if(res.data.success){
                 message.success('successfully registered')
                 navigate('/login')
@@ -23,6 +28,7 @@ const Register = () => {
                 message.error(res.data.message)
             }
         } catch (error) {
+            dispactch(hideLoading());
             console.log(error)
             message.error('Something went wrong')
         }
