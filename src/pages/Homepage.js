@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react'
 import axios from 'axios';
+import Layout from '../components/Layout';
 
 const Homepage = () => {
 
@@ -21,10 +22,10 @@ const Homepage = () => {
   }, [])
 
   return (
-    <div>
-        <h1>Home page</h1>
-    </div>
+    <Layout>
+      <h1>Home Page</h1>
+    </Layout>
   )
 }
 
-export default Homepage
+export default Homepage;
