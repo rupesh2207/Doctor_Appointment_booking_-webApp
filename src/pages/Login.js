@@ -15,6 +15,7 @@ const Login = () => {
     try {
         dispactch(showLoading());
         const res = await axios.post("/api/v1/user/login",values);
+        window.location.reload();
         dispactch(hideLoading());
         if(res.data.success){
             localStorage.setItem('token',res.data.token);
